@@ -1,5 +1,7 @@
+import { Button } from "@/app/_components/ui/button";
+
 const Home = () => {
-  return <h1 className="text-red-600">Zaimu.ai</h1>;
+  return <Button>Hello World</Button>;
 };
 
 export default Home;
