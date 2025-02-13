@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { redirect } from "next/navigation";
+import { Button } from "@/app/_components/ui/button";
 import { SignInButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
-import { Button } from "@/app/_components/ui/button";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 
 const SignInPage = () => {
   const { userId } = auth();
