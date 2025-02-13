@@ -1,7 +1,12 @@
-import { Button } from "@/app/_components/ui/button";
+import { redirect } from "next/navigation";
+import { UserButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 const Home = () => {
-  return <Button>Hello World</Button>;
+  const { userId } = auth();
+  if (!userId) redirect("/sign-in");
+
+  return <UserButton showName />;
 };
 
 export default Home;
