@@ -58,3 +58,25 @@ export type Transaction = {
   updatedAt: Date;
   userId: string;
 };
+
+export const TRANSACTION_CATEGORY_LABELS = Object.freeze({
+  EDUCATION: "Educação",
+  HOUSING: "Moradia",
+  TRANSPORTATION: "Transporte",
+  FOOD: "Alimentação",
+  ENTERTAINMENT: "Entretenimento",
+  HEALTH: "Saúde",
+  UTILITY: "Utilidades",
+  SALARY: "Salário",
+  OTHER: "Outros",
+});
+
+export const TRANSACTION_PAYMENT_METHOD_LABELS = Object.freeze({
+  CREDIT_CARD: "Cartão de Crédito",
+  DEBIT_CARD: "Cartão de Débito",
+  BANK_TRANSFER: "Transferência Bancária",
+  BANK_SLIP: "Boleto Bancário",
+  CASH: "Dinheiro",
+  PIX: "Pix",
+  OTHER: "Outros",
+});
