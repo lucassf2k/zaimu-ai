@@ -1,9 +1,10 @@
 import { Badge } from "@/app/_components/ui/badge";
-import { Transaction, TransactionTypeEnum } from "@/app/_domain/transaction";
+import { TransactionTypeEnum } from "@/app/_domain/transaction";
+import { Transactions } from "@prisma/client";
 import { CircleIcon } from "lucide-react";
 
 type TransactionTypeBadgeProps = {
-  transaction: Transaction;
+  transaction: Transactions;
 };
 
 const TransactionTypeBadge = ({ transaction }: TransactionTypeBadgeProps) => {

@@ -2,17 +2,17 @@
 
 import { Button } from "@/app/_components/ui/button";
 import {
-  Transaction,
   TRANSACTION_CATEGORY_LABELS,
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_domain/transaction";
-import { FormatCurrency } from "@/app/_lib/format-currency";
 import { FormatDate } from "@/app/_lib/format-date";
 import TransactionTypeBadge from "@/app/transactions/_components/transaction-type-badge";
+import { Transactions } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
-import { PencilIcon, TrashIcon } from "lucide-react";
+import { TrashIcon } from "lucide-react";
+import { EditTransactionButton } from "../_components/edit-transaction-button";
 
-export const transactionColumns: ColumnDef<Transaction>[] = [
+export const transactionColumns: ColumnDef<Transactions>[] = [
   {
     accessorKey: "name",
     header: "Nome",
@@ -49,17 +49,18 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
     accessorKey: "amount",
     header: "Valor",
     cell: ({ row: { original: transaction } }) => {
-      return FormatCurrency.toBR(transaction.amount);
+      return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      }).format(Number(transaction.amaount));
     },
   },
   {
     accessorKey: "actions",
     header: "",
-    cell: () => (
+    cell: ({ row: { original: transaction } }) => (
       <div className="space-x-1">
-        <Button variant="ghost" size="icon" className="text-muted-foreground">
-          <PencilIcon />
-        </Button>
+        <EditTransactionButton transaction={transaction} />
         <Button variant="ghost" size="icon" className="text-muted-foreground">
           <TrashIcon />
         </Button>

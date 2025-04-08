@@ -1,7 +1,7 @@
 import { DataTable } from "@/app/_components/ui/data-table";
 import { fetchPrismaAllTransactions } from "@/app/_lib/prisma/fetch-prisma-all-transactions";
 import { transactionColumns } from "@/app/transactions/_columns";
-import AddTransactionButton from "../_components/add-transaction-button";
+import { AddTransactionButton } from "../_components/add-transaction-button";
 
 const TransactionsPage = async () => {
   const transactions = await fetchPrismaAllTransactions();
