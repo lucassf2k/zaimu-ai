@@ -1,11 +1,15 @@
 import { DataTable } from "@/app/_components/ui/data-table";
 import { fetchPrismaAllTransactions } from "@/app/_lib/prisma/fetch-prisma-all-transactions";
 import { transactionColumns } from "@/app/transactions/_columns";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 import { AddTransactionButton } from "../_components/add-transaction-button";
 import { Navbar } from "../_components/navbar";
 
 const TransactionsPage = async () => {
-  const transactions = await fetchPrismaAllTransactions();
+  const { userId } = auth();
+  if (!userId) redirect("/sign-in");
+  const transactions = await fetchPrismaAllTransactions(userId);
 
   return (
     <>

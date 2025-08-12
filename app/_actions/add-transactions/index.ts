@@ -35,11 +35,11 @@ export const upsertTransactions = async (params: IAddTransactions) => {
     userId,
   };
   await db.transactions.upsert({
-    where: {
-      id: params.id,
-    },
     update: input,
     create: input,
+    where: {
+      id: params?.id ?? "",
+    },
   });
   revalidatePath("/transactions");
 };
