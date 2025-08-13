@@ -12,10 +12,11 @@ interface SummaryCardsProps {
 }
 
 export const SummaryCards = async ({ month }: SummaryCardsProps) => {
+  const currentYear = new Date().getFullYear();
   const where = {
     date: {
-      gte: new Date(`2024-${month}-01`),
-      lt: new Date(`2024-${month}-31`),
+      gte: new Date(`${currentYear}-${month}-01`),
+      lt: new Date(`${currentYear}-${month}-31`),
     },
   };
 
