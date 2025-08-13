@@ -1,0 +1,39 @@
+import { AddTransactionButton } from "@/app/_components/add-transaction-button";
+import { Card, CardContent, CardHeader } from "@/app/_components/ui/card";
+import { FormatCurrency } from "@/app/_lib/format-currency";
+import type { ReactNode } from "react";
+
+interface SummaryCardProps {
+  icon: ReactNode;
+  title: string;
+  amount: number;
+  size?: "sm" | "lg";
+}
+
+export const SummaryCard = ({
+  title,
+  amount,
+  icon,
+  size = "sm",
+}: SummaryCardProps) => {
+  return (
+    <Card>
+      <CardHeader className="flex-row items-center gap-4">
+        {icon}
+        <p
+          className={
+            size === "sm" ? "text-muted-foreground" : "text-white opacity-70"
+          }
+        >
+          {title}
+        </p>
+      </CardHeader>
+      <CardContent className="flex justify-between">
+        <p className={`font-bold ${size === "sm" ? "text-2xl" : "text-4xl"}`}>
+          {FormatCurrency.toBR(amount)}
+        </p>
+        {size === "lg" && <AddTransactionButton />}
+      </CardContent>
+    </Card>
+  );
+};
