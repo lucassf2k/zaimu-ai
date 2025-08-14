@@ -1,3 +1,5 @@
+import { TransactionPaymentMethod } from "@prisma/client";
+
 export enum TransactionTypeEnum {
   DEPOSIT = "DEPOSIT",
   EXPENSE = "EXPENSE",
@@ -37,14 +39,14 @@ export type TransactionCategory =
   | "EDUCATION"
   | "OTHER";
 
-export type TransactionPaymentMethod =
-  | "CREDIT_CARD"
-  | "DEBIT_CARD"
-  | "BANK_TRANSFER"
-  | "BANK_SLIP"
-  | "CASH"
-  | "PIX"
-  | "OTHER";
+// export type TransactionPaymentMethod =
+//   | "CREDIT_CARD"
+//   | "DEBIT_CARD"
+//   | "BANK_TRANSFER"
+//   | "BANK_SLIP"
+//   | "CASH"
+//   | "PIX"
+//   | "OTHER";
 
 export type Transaction = {
   id: string;
@@ -57,6 +59,16 @@ export type Transaction = {
   createdAt: Date;
   updatedAt: Date;
   userId: string;
+};
+
+export const TRANSACTION_PAYMENT_METHOD_ICONS = {
+  [TransactionPaymentMethod.CREDIT_CARD]: "credit-card.svg",
+  [TransactionPaymentMethod.DEBIT_CARD]: "debit-card.svg",
+  [TransactionPaymentMethod.BANK_TRANSFER]: "bank-transfer.svg",
+  [TransactionPaymentMethod.BANK_SLIP]: "bank-slip.svg",
+  [TransactionPaymentMethod.CASH]: "money.svg",
+  [TransactionPaymentMethod.PIX]: "pix.svg",
+  [TransactionPaymentMethod.OTHER]: "other.svg",
 };
 
 export const TRANSACTION_CATEGORY_LABELS = Object.freeze({
