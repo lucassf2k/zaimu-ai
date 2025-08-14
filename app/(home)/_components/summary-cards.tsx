@@ -1,4 +1,3 @@
-import { db } from "@/app/_lib/prisma/db";
 import {
   PiggyBankIcon,
   TrendingDownIcon,
@@ -8,62 +7,18 @@ import {
 import { SummaryCard } from "./summary-card";
 
 interface SummaryCardsProps {
-  month: string;
+  balance: number;
+  investmentsTotal: number;
+  depositsTotal: number;
+  expensesTotal: number;
 }
 
-export const SummaryCards = async ({ month }: SummaryCardsProps) => {
-  const currentYear = new Date().getFullYear();
-  const where = {
-    date: {
-      gte: new Date(`${currentYear}-${month}-01`),
-      lt: new Date(`${currentYear}-${month}-31`),
-    },
-  };
-
-  const depositsTotal = Number(
-    (
-      await db.transactions.aggregate({
-        where: {
-          ...where,
-          type: "DEPOSIT",
-        },
-        _sum: {
-          amaount: true,
-        },
-      })
-    )?._sum?.amaount,
-  );
-  const investmentsTotal = Number(
-    (
-      await db.transactions.aggregate({
-        where: {
-          ...where,
-          type: "INVESTMENT",
-        },
-        _sum: {
-          amaount: true,
-        },
-      })
-    )?._sum?.amaount,
-  );
-  const expensesTotal = Number(
-    (
-      await db.transactions.aggregate({
-        where: {
-          date: {
-            gte: new Date(`2025-${month}-01`),
-            lt: new Date(`2025-${month}-31`),
-          },
-          type: "EXPENSE",
-        },
-        _sum: {
-          amaount: true,
-        },
-      })
-    )?._sum?.amaount,
-  );
-  const balance = depositsTotal - investmentsTotal - expensesTotal;
-
+export const SummaryCards = async ({
+  balance,
+  investmentsTotal,
+  depositsTotal,
+  expensesTotal,
+}: SummaryCardsProps) => {
   return (
     <div className="space-y-6">
       {/* PRIMEIRO CARD */}

@@ -1,7 +1,7 @@
 export enum TransactionTypeEnum {
   DEPOSIT = "DEPOSIT",
   EXPENSE = "EXPENSE",
-  INVESTIMENT = "INVESTIMENT",
+  INVESTMENT = "INVESTMENT",
 }
 export enum TransactionCategoryEnum {
   HOUSING = "HOUSING",
@@ -25,7 +25,7 @@ export enum TransactionPaymentMethodEnum {
   OTHER = "OTHER",
 }
 
-export type TransactionType = "DEPOSIT" | "EXPENSE" | "INVESTIMENT";
+export type TransactionType = "DEPOSIT" | "EXPENSE" | "INVESTMENT";
 export type TransactionCategory =
   | "HOUSING"
   | "TRANSPORTATION"
@@ -97,7 +97,7 @@ export const TRANSACTION_TYPES_OPTIONS: Readonly<TransactionTypeOptions> =
       label: "Depósito",
     },
     {
-      value: TransactionTypeEnum.INVESTIMENT,
+      value: TransactionTypeEnum.INVESTMENT,
       label: "Investimento",
     },
   ]);

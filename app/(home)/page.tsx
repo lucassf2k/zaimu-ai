@@ -2,8 +2,10 @@ import { auth } from "@clerk/nextjs/server";
 import { isMatch } from "date-fns";
 import { redirect } from "next/navigation";
 import { Navbar } from "../_components/navbar";
+import { getDashboard } from "../_data/get-dashboard";
 import { SummaryCards } from "./_components/summary-cards";
 import { TimeSelect } from "./_components/time-select";
+import { TransactionsPieChartDonut } from "./_components/transactions-pie-chart";
 
 interface HomeProps {
   searchParams: {
@@ -11,11 +13,12 @@ interface HomeProps {
   };
 }
 
-const Home = ({ searchParams: { month } }: HomeProps) => {
+const Home = async ({ searchParams: { month } }: HomeProps) => {
   const { userId } = auth();
   if (!userId) redirect("/sign-in");
   const monthIsInvalid = !month || !isMatch(month, "MM");
   if (monthIsInvalid) redirect("/?month=01");
+  const dashboardData = await getDashboard(month);
 
   return (
     <>
@@ -27,7 +30,12 @@ const Home = ({ searchParams: { month } }: HomeProps) => {
         </div>
 
         <div className="grid grid-cols-[2fr,1fr]">
-          <SummaryCards month={month} />
+          <div className="flex flex-col gap-6">
+            <SummaryCards {...dashboardData} />
+            <div className="grid grid-cols-3 grid-rows-1 gap-6">
+              <TransactionsPieChartDonut {...dashboardData} />
+            </div>
+          </div>
         </div>
       </div>
     </>
