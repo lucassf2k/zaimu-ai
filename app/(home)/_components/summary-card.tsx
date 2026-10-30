@@ -8,13 +8,15 @@ interface SummaryCardProps {
   title: string;
   amount: number;
   size?: "sm" | "lg";
+  userCanAddTransaction?: boolean;
 }
 
-export const SummaryCard = ({
+export const SummaryCard = async ({
   title,
   amount,
   icon,
   size = "sm",
+  userCanAddTransaction,
 }: SummaryCardProps) => {
   return (
     <Card className={size === "lg" ? "bg-white/5" : ""}>
@@ -32,7 +34,9 @@ export const SummaryCard = ({
         <p className={`font-bold ${size === "sm" ? "text-2xl" : "text-4xl"}`}>
           {FormatCurrency.toBR(amount)}
         </p>
-        {size === "lg" && <AddTransactionButton />}
+        {size === "lg" && (
+          <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
+        )}
       </CardContent>
     </Card>
   );

@@ -6,11 +6,14 @@ import { redirect } from "next/navigation";
 import { AddTransactionButton } from "../_components/add-transaction-button";
 import { Navbar } from "../_components/navbar";
 import { ScrollArea } from "../_components/ui/scroll-area";
+import { canUserAddTransaction } from "../_data/can-user-add-transaction";
 
 const TransactionsPage = async () => {
   const { userId } = auth();
   if (!userId) redirect("/sign-in");
   const transactions = await fetchPrismaAllTransactions(userId);
+
+  const userCanAddTransaction = await canUserAddTransaction();
 
   return (
     <>
@@ -20,7 +23,9 @@ const TransactionsPage = async () => {
         {/* HEARDER */}
         <div className="flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Transações</h1>
-          <AddTransactionButton />
+          <AddTransactionButton
+            userCanAddTransaction={!userCanAddTransaction}
+          />
         </div>
         <ScrollArea>
           <DataTable columns={transactionColumns} data={transactions} />

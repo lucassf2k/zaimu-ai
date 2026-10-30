@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { Navbar } from "../_components/navbar";
 import { Badge } from "../_components/ui/badge";
 import { Card, CardContent, CardHeader } from "../_components/ui/card";
+import { fetchGetCurrentMonthTransaction } from "../_lib/prisma/fetch-current-month-transaction";
 import AcquirePlanButton from "./_components/acquire-plan-button";
 
 const SubscriptionPage = async () => {
@@ -11,6 +12,7 @@ const SubscriptionPage = async () => {
   if (!userId) redirect("/sign-in");
 
   const user = await clerkClient().users.getUser(userId);
+  const currentMonthTransaction = await fetchGetCurrentMonthTransaction();
   const hasPremiumPlan = user.publicMetadata.hasPremiumPlan === "premium";
 
   return (
@@ -33,7 +35,7 @@ const SubscriptionPage = async () => {
             <CardContent className="space-y-6 py-8">
               <div className="flex items-center gap-2">
                 <CheckIcon className="text-green-500" />
-                <p>Apenas 10 transações por mês (7/10)</p>
+                <p>Apenas 10 transações por mês {currentMonthTransaction}/10</p>
               </div>
               <div className="flex items-center gap-3">
                 <XIcon />
