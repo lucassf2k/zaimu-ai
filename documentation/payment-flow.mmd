@@ -1,0 +1,30 @@
+
+flowchart TD
+    A([User]) --> B[Zaimu AI Application]
+
+    B --> C{Subscription Action}
+
+    C -->|Subscribe| D[Stripe Checkout]
+    D --> E[User Completes Payment]
+    E --> F[Stripe Checkout Webhook]
+    F --> G{Payment Successful?}
+
+    G -->|Yes| H[Update User in Clerk]
+    H --> I[Set Premium = true]
+    I --> J[Redirect User to Application]
+
+    G -->|No| K[Keep Free Plan]
+    K --> J
+
+    C -->|Cancel Subscription| L[Stripe Billing Portal]
+    L --> M[User Cancels Subscription]
+    M --> N[Stripe Cancellation Webhook]
+    N --> O[Update User in Clerk]
+    O --> P[Set Premium = false]
+    P --> Q[Redirect User to Application]
+
+    J --> R([End])
+    Q --> R
+
+    style I fill:#d1fae5,stroke:#059669,color:#065f46
+    style P fill:#fee2e2,stroke:#dc2626,color:#991b1b
