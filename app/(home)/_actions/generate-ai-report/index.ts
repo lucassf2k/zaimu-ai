@@ -1,4 +1,4 @@
-"user server";
+"use server";
 
 import { db } from "@/app/_lib/prisma/db";
 import { auth, clerkClient } from "@clerk/nextjs/server";

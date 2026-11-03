@@ -13,15 +13,17 @@ import {
 } from "@/app/_components/ui/dialog";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { BotIcon, Loader2Icon } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
 import { generateAiReport } from "../_actions/generate-ai-report";
 
 interface Props {
+  hasPremiumPlan: boolean;
   month: string;
 }
 
-const AiReportButton = ({ month }: Props) => {
+const AiReportButton = ({ month, hasPremiumPlan }: Props) => {
   const [report, setReport] = useState<string | null>(null);
   const [reportIsLoading, setReportIsLoading] = useState(false);
 
@@ -45,33 +47,57 @@ const AiReportButton = ({ month }: Props) => {
           <BotIcon />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[600px]">
-        <DialogHeader>
-          <DialogTitle>Relatório de IA</DialogTitle>
-          <DialogDescription>
-            Use Inteligência artificial para gerar um relatório cons insights
-            sobre suas finanças
-          </DialogDescription>
-        </DialogHeader>
-        <ScrollArea className="prose prose-h3:text-white max-h-[450px] text-white prose-h4:text-white prose-strong:text-white">
-          <Markdown>{report}</Markdown>
-        </ScrollArea>
-        <DialogFooter>
-          <DialogClose>
-            <Button variant="ghost" className="font-bold">
-              Cancelar
+      {hasPremiumPlan ? (
+        <DialogContent className="max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Relatório de IA</DialogTitle>
+            <DialogDescription>
+              Use Inteligência artificial para gerar um relatório cons insights
+              sobre suas finanças
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="prose prose-h3:text-white max-h-[450px] text-white prose-h4:text-white prose-strong:text-white">
+            <Markdown>{report}</Markdown>
+          </ScrollArea>
+          <DialogFooter>
+            <DialogClose>
+              <Button variant="ghost" className="font-bold">
+                Cancelar
+              </Button>
+            </DialogClose>
+            <Button
+              onClick={handleGenerateReport}
+              disabled={reportIsLoading}
+              className="font-bold"
+            >
+              {reportIsLoading && <Loader2Icon className="animate-spin" />}
+              Gerar relatório
             </Button>
-          </DialogClose>
-          <Button
-            onClick={handleGenerateReport}
-            disabled={reportIsLoading}
-            className="font-bold"
-          >
-            {reportIsLoading && <Loader2Icon className="animate-spin" />}
-            Gerar relatório
-          </Button>
-        </DialogFooter>
-      </DialogContent>
+          </DialogFooter>
+        </DialogContent>
+      ) : (
+        <DialogContent className="max-w-[600px]">
+          <DialogHeader>
+            <DialogTitle>Relatório de IA</DialogTitle>
+            <DialogDescription>
+              Você precisa de um plano premium para gerar um relatório com IA.
+            </DialogDescription>
+          </DialogHeader>
+          <ScrollArea className="prose prose-h3:text-white max-h-[450px] text-white prose-h4:text-white prose-strong:text-white">
+            <Markdown>{report}</Markdown>
+          </ScrollArea>
+          <DialogFooter>
+            <DialogClose>
+              <Button variant="ghost" className="font-bold">
+                Cancelar
+              </Button>
+            </DialogClose>
+            <Button asChild>
+              <Link href="/subscription">Assinar premium</Link>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      )}
     </Dialog>
   );
 };
