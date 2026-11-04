@@ -4,9 +4,15 @@ import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
   const pathname = usePathname();
+  const [userButtonMounted, setUserButtonMounted] = useState(false);
+
+  useEffect(() => {
+    setUserButtonMounted(true);
+  }, []);
 
   const routeSelectorActivatedClassName = (route: string): string => {
     return pathname === route
@@ -34,7 +40,14 @@ export const Navbar = () => {
           Assinatura
         </Link>
       </div>
-      <UserButton showName />
+      {userButtonMounted ? (
+        <UserButton showName />
+      ) : (
+        <div className="flex items-center gap-3">
+          <div className="h-4 w-24 rounded-md bg-muted animate-pulse" />
+          <div className="h-9 w-9 rounded-full bg-muted animate-pulse" />
+        </div>
+      )}
     </nav>
   );
 };
