@@ -1,19 +1,13 @@
-import { auth, clerkClient } from "@clerk/nextjs/server";
 import { CheckIcon, XIcon } from "lucide-react";
-import { redirect } from "next/navigation";
 import { Navbar } from "../_components/navbar";
 import { Badge } from "../_components/ui/badge";
 import { Card, CardContent, CardHeader } from "../_components/ui/card";
-import { fetchGetCurrentMonthTransaction } from "../_lib/prisma/fetch-current-month-transaction";
 import AcquirePlanButton from "./_components/acquire-plan-button";
+import { subscriptionController } from "./_controllers/subscription-controller";
 
 const SubscriptionPage = async () => {
-  const { userId } = auth();
-  if (!userId) redirect("/sign-in");
-
-  const user = await clerkClient().users.getUser(userId);
-  const currentMonthTransaction = await fetchGetCurrentMonthTransaction();
-  const hasPremiumPlan = user.publicMetadata.hasPremiumPlan === "premium";
+  const { currentMonthTransaction, hasPremiumPlan } =
+    await subscriptionController();
 
   return (
     <>

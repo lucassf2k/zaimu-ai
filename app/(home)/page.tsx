@@ -1,15 +1,11 @@
-import { auth, clerkClient } from "@clerk/nextjs/server";
-import { isMatch } from "date-fns";
-import { redirect } from "next/navigation";
-import { Navbar } from "../_components/navbar";
-import { canUserAddTransaction } from "../_data/can-user-add-transaction";
-import { getDashboard } from "../_data/get-dashboard";
-import AiReportButton from "./_components/ai-report-button";
-import { ExpensesPerCategory } from "./_components/expenses-per-category";
-import { LastTransactions } from "./_components/last-transactions";
-import { SummaryCards } from "./_components/summary-cards";
-import { TimeSelect } from "./_components/time-select";
-import { TransactionsPieChartDonut } from "./_components/transactions-pie-chart";
+import AiReportButton from "@/app/(home)/_components/ai-report-button";
+import { ExpensesPerCategory } from "@/app/(home)/_components/expenses-per-category";
+import { LastTransactions } from "@/app/(home)/_components/last-transactions";
+import { SummaryCards } from "@/app/(home)/_components/summary-cards";
+import { TimeSelect } from "@/app/(home)/_components/time-select";
+import { TransactionsPieChartDonut } from "@/app/(home)/_components/transactions-pie-chart";
+import { homeController } from "@/app/(home)/_controllers/use-home-controller";
+import { Navbar } from "@/app/_components/navbar";
 
 interface HomeProps {
   searchParams: {
@@ -18,18 +14,8 @@ interface HomeProps {
 }
 
 const Home = async ({ searchParams: { month } }: HomeProps) => {
-  const { userId } = auth();
-  if (!userId) redirect("/sign-in");
-  const monthIsInvalid = !month || !isMatch(month, "MM");
-  if (monthIsInvalid) {
-    const currenteMonth = new Date().getMonth() + 1;
-    redirect(`/?month=${currenteMonth}`);
-  }
-  const dashboardData = await getDashboard(month);
-
-  const userCanAddTransaction = await canUserAddTransaction();
-  const user = await clerkClient().users.getUser(userId);
-  const hasPremiumPlan = user.publicMetadata.hasPremiumPlan === "premium";
+  const { dashboardData, userCanAddTransaction, hasPremiumPlan } =
+    await homeController(month);
 
   return (
     <>
