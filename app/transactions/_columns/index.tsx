@@ -7,14 +7,18 @@ import {
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_domain/transaction";
 import { FormatDate } from "@/app/_lib/format-date";
+import { EditTransactionButton } from "@/app/transactions/_components/edit-transaction-button";
 import TransactionTypeBadge from "@/app/transactions/_components/transaction-type-badge";
 import { Transactions } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { TrashIcon } from "lucide-react";
-import { EditTransactionButton } from "../_components/edit-transaction-button";
+import { toast } from "sonner";
 
 export const handleDeleteTransactionOfId = (id: string) => {
-  return async () => await deleteTransactionOfId({ id });
+  return async () => {
+    await deleteTransactionOfId({ id });
+    toast.success("Transação excluida com sucesso.");
+  };
 };
 
 export const transactionColumns: ColumnDef<Transactions>[] = [

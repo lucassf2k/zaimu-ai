@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 
+import { Toaster } from "@/app/_components/ui/sonner";
 import "./globals.css";
 
 const mulish = Mulish({
@@ -26,6 +27,7 @@ export default function RootLayout({
         <body className={`${mulish.className} dark antialiased`}>
           <NextTopLoader color="#F627BB" />
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

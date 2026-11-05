@@ -10,6 +10,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { upsertTransactions } from "../_actions/add-transactions";
 import {
@@ -94,11 +95,19 @@ export const UpsertTransactionDialog = ({
   });
 
   const onSubmit = async (data: FormSchema) => {
-    setIsloading(true);
-    await upsertTransactions({ ...data, id: transactionId });
-    setIsOpen(false);
-    form.reset();
-    setIsloading(false);
+    try {
+      setIsloading(true);
+      await upsertTransactions({ ...data, id: transactionId });
+      setIsOpen(false);
+      form.reset();
+      toast.success("Transação salva com sucesso.");
+    } catch {
+      toast.warning(
+        "Ocorreu um erro ao salvar a transação. Tente novamente mais tarde.",
+      );
+    } finally {
+      setIsloading(false);
+    }
   };
 
   const resetForm = () => {

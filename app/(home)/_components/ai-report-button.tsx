@@ -16,6 +16,7 @@ import { BotIcon, Loader2Icon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Markdown from "react-markdown";
+import { toast } from "sonner";
 import { generateAiReport } from "../_actions/generate-ai-report";
 
 interface Props {
@@ -32,8 +33,11 @@ const AiReportButton = ({ month, hasPremiumPlan }: Props) => {
       setReportIsLoading(true);
       const aiReport = await generateAiReport({ month });
       setReport(aiReport);
-    } catch (error) {
-      console.error(error);
+      toast.success("Relatório gerado com sucesso.");
+    } catch {
+      toast.warning(
+        "Ocorreu um erro ao gerar o relatório. Tente novamente mais tarde.",
+      );
     } finally {
       setReportIsLoading(false);
     }

@@ -19,7 +19,6 @@ export const homeController = async (month: string) => {
       canUserAddTransaction(),
       getOfClerkUserHasPremiumPlan(),
     ]);
-
   return {
     dashboardData,
     userCanAddTransaction,
