@@ -2,6 +2,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="pt-BR">
         <body className={`${mulish.className} dark antialiased`}>
+          <NextTopLoader color="#F627BB" />
           {children}
         </body>
       </html>
