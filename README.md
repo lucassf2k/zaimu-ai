@@ -4,6 +4,20 @@
 
 The platform allows users to track and manage their expenses, access premium features through Stripe subscriptions, and generate AI-powered financial reports using GPT.
 
+## UI Design
+
+<p align="center">
+  <img src="./documentation/ui/home.png" alt="Zaimu AI - Home" width="800" />
+</p>
+
+<p align="center">
+  <img src="./documentation/ui/transactions.png" alt="Zaimu AI - Transactions" width="800" />
+</p>
+
+<p align="center">
+  <img src="./documentation/ui/subscriptions.png" alt="Zaimu AI - Subscriptions" width="800" />
+</p>
+
 ## Features
 
 - **Expense Management:** Track and manage personal expenses.

@@ -47,17 +47,17 @@ export const TransactionsPieChartDonut = ({
     {
       type: TransactionType.INVESTMENT,
       amount: investmentsTotal,
-      fill: "#FFFFFF",
+      fill: "#00BFFF",
     },
     {
       type: TransactionType.DEPOSIT,
       amount: depositsTotal,
-      fill: "#55802E",
+      fill: "#39FF14",
     },
     {
       type: TransactionType.EXPENSE,
       amount: expensesTotal,
-      fill: "#E93030",
+      fill: "#FF3131",
     },
   ];
 
