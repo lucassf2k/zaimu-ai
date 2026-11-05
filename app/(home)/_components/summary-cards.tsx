@@ -37,18 +37,21 @@ export const SummaryCards = async ({
           title="Investido"
           amount={investmentsTotal}
           icon={<PiggyBankIcon size={16} />}
+          snakeDecorationColor="blue"
         />
 
         <SummaryCard
           title="Receita"
           amount={depositsTotal}
           icon={<TrendingUpIcon size={16} className="text-green-500" />}
+          snakeDecorationColor="green"
         />
 
         <SummaryCard
           title="Despesas"
           amount={expensesTotal}
           icon={<TrendingDownIcon size={16} className="text-red-500" />}
+          snakeDecorationColor="red"
         />
       </div>
     </div>

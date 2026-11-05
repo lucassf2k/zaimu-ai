@@ -27,19 +27,60 @@ const MONTH_OPTIONS = [
 export const TimeSelect = () => {
   const { push } = useRouter();
   const month = useSearchParams().get("month");
-  const handleMonthChange = (month: string) => push(`/?month=${month}`);
+
+  const handleMonthChange = (month: string) => {
+    push(`/?month=${month}`);
+  };
 
   return (
-    <Select
-      onValueChange={(value) => handleMonthChange(value)}
-      defaultValue={month || ""}
-    >
-      <SelectTrigger className="w-[180px] rounded-sm">
+    <Select onValueChange={handleMonthChange} defaultValue={month || ""}>
+      <SelectTrigger
+        className="
+          w-[180px] h-10
+          rounded-xl
+          border border-white/[0.10]
+          bg-white/[0.04]
+          text-slate-200
+          backdrop-blur-xl
+          shadow-[0_4px_20px_rgba(0,0,0,0.15)]
+          transition-all duration-200
+          hover:bg-white/[0.07]
+          hover:border-violet-400/30
+          hover:shadow-[0_0_20px_rgba(139,92,246,0.10)]
+          focus:ring-2
+          focus:ring-violet-500/30
+          focus:ring-offset-0
+          data-[state=open]:border-violet-400/40
+          data-[state=open]:bg-white/[0.07]
+        "
+      >
         <SelectValue placeholder="Mês" />
       </SelectTrigger>
-      <SelectContent>
+
+      <SelectContent
+        className="
+          rounded-xl
+          border border-white/[0.10]
+          bg-slate-950/95
+          text-slate-200
+          shadow-[0_12px_40px_rgba(0,0,0,0.45)]
+          backdrop-blur-2xl
+        "
+      >
         {MONTH_OPTIONS.map((option) => (
-          <SelectItem key={option.value} value={option.value}>
+          <SelectItem
+            key={option.value}
+            value={option.value}
+            className="
+              cursor-pointer
+              rounded-lg
+              text-slate-300
+              focus:bg-violet-500/15
+              focus:text-white
+              data-[state=checked]:bg-violet-500/20
+              data-[state=checked]:text-white
+            "
+          >
             {option.label}
           </SelectItem>
         ))}

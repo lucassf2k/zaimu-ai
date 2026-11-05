@@ -15,31 +15,70 @@ export const Navbar = () => {
   }, []);
 
   const routeSelectorActivatedClassName = (route: string): string => {
-    return pathname === route
-      ? "font-bold text-primary"
-      : "text-muted-foreground";
+    const isActive = pathname === route;
+
+    return `
+      relative flex items-center px-4 py-2 rounded-full
+      text-sm font-medium
+      transition-all duration-300 ease-out
+      ${
+        isActive
+          ? "text-white bg-violet-500/15 border border-violet-400/20 shadow-[0_0_20px_rgba(139,92,246,0.12)]"
+          : "text-slate-400 border border-transparent hover:text-white hover:bg-white/[0.04]"
+      }
+    `;
   };
 
   return (
-    <nav className="flex justify-between px-8 py-4 border-b border-solid">
+    <nav
+      className="
+        sticky top-0 z-50
+        flex items-center justify-between
+        px-8 py-3
+        bg-slate-950/20
+        backdrop-blur-2xl
+        border-b border-white/[0.04]
+        shadow-[0_4px_30px_rgba(0,0,0,0.08)]
+        before:absolute before:inset-0 before:-z-10
+        before:bg-gradient-to-r
+        before:from-violet-600/[0.04]
+        before:via-transparent
+        before:to-pink-600/[0.04]
+        before:pointer-events-none
+      "
+    >
       <div className="flex items-center gap-10">
-        <Image src="/logo.svg" alt="zaimu ai" width={173} height={39} />
-        <Link href="/" className={routeSelectorActivatedClassName("/")}>
-          Dashboard
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/logo.svg"
+            alt="zaimu ai"
+            width={173}
+            height={39}
+            priority
+          />
         </Link>
-        <Link
-          href="/transactions"
-          className={routeSelectorActivatedClassName("/transactions")}
-        >
-          Transações
-        </Link>
-        <Link
-          href="/subscription"
-          className={routeSelectorActivatedClassName("/subscription")}
-        >
-          Assinatura
-        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link href="/" className={routeSelectorActivatedClassName("/")}>
+            Dashboard
+          </Link>
+
+          <Link
+            href="/transactions"
+            className={routeSelectorActivatedClassName("/transactions")}
+          >
+            Transações
+          </Link>
+
+          <Link
+            href="/subscription"
+            className={routeSelectorActivatedClassName("/subscription")}
+          >
+            Assinatura
+          </Link>
+        </div>
       </div>
+
       {userButtonMounted ? (
         <UserButton showName />
       ) : (

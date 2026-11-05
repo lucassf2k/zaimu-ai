@@ -37,6 +37,7 @@ const AcquirePlanButton = () => {
 
   return (
     <Button
+      variant="gradient"
       className="w-full rounded-full font-bold"
       onClick={handleAcquirePlan}
     >

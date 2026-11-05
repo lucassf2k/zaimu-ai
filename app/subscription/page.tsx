@@ -1,7 +1,8 @@
 import { CheckIcon, XIcon } from "lucide-react";
+import { GlassCard } from "../_components/glass-card";
 import { Navbar } from "../_components/navbar";
 import { Badge } from "../_components/ui/badge";
-import { Card, CardContent, CardHeader } from "../_components/ui/card";
+import { CardContent, CardHeader } from "../_components/ui/card";
 import AcquirePlanButton from "./_components/acquire-plan-button";
 import { subscriptionController } from "./_controllers/subscription-controller";
 
@@ -15,7 +16,7 @@ const SubscriptionPage = async () => {
       <div className="p6 space-y-6 p-8">
         <h1 className="font-bold text-2xl">Assinaturas</h1>
         <div className="flex gap-6">
-          <Card className="w-[450px]">
+          <GlassCard variant="blue" className="w-[450px]">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">
                 Plano Básico
@@ -36,9 +37,9 @@ const SubscriptionPage = async () => {
                 <p>Relatórios de IA</p>
               </div>
             </CardContent>
-          </Card>
+          </GlassCard>
 
-          <Card className="w-[450px]">
+          <GlassCard variant="blue" className="w-[450px]">
             <CardHeader className="border-b border-solid py-8 relative">
               {hasPremiumPlan && (
                 <Badge className="absolute top-12 left-4 bg-primary/10 text-primary">
@@ -65,7 +66,7 @@ const SubscriptionPage = async () => {
               </div>
               <AcquirePlanButton />
             </CardContent>
-          </Card>
+          </GlassCard>
         </div>
       </div>
     </>

@@ -46,7 +46,7 @@ const AiReportButton = ({ month, hasPremiumPlan }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="font-bold">
+        <Button variant="glass" className="font-bold">
           Relatório de IA
           <BotIcon />
         </Button>
@@ -96,7 +96,7 @@ const AiReportButton = ({ month, hasPremiumPlan }: Props) => {
                 Cancelar
               </Button>
             </DialogClose>
-            <Button asChild>
+            <Button asChild variant="gradient">
               <Link href="/subscription">Assinar premium</Link>
             </Button>
           </DialogFooter>

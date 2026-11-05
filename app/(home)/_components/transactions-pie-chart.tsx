@@ -2,7 +2,8 @@
 
 import { Pie, PieChart } from "recharts";
 
-import { Card, CardContent } from "@/app/_components/ui/card";
+import { GlassCard } from "@/app/_components/glass-card";
+import { CardContent } from "@/app/_components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
@@ -61,7 +62,7 @@ export const TransactionsPieChartDonut = ({
   ];
 
   return (
-    <Card className="flex flex-col p-6">
+    <GlassCard variant="blue" className="flex flex-col p-6">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
@@ -99,6 +100,6 @@ export const TransactionsPieChartDonut = ({
           />
         </div>
       </CardContent>
-    </Card>
+    </GlassCard>
   );
 };

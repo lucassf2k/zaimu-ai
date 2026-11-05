@@ -28,6 +28,7 @@ export const AddTransactionButton = ({ userCanAddTransaction }: Props) => {
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
+              variant="gradient"
               className="rounded-full font-bold"
               onClick={hanldeOpenDialog()}
               disabled={userCanAddTransaction}
