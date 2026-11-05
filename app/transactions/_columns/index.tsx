@@ -1,5 +1,6 @@
 "use client";
 
+import { deleteTransactionOfId } from "@/app/_actions/delete-transaction-of-id";
 import { Button } from "@/app/_components/ui/button";
 import {
   TRANSACTION_CATEGORY_LABELS,
@@ -11,6 +12,10 @@ import { Transactions } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { TrashIcon } from "lucide-react";
 import { EditTransactionButton } from "../_components/edit-transaction-button";
+
+export const handleDeleteTransactionOfId = (id: string) => {
+  return async () => await deleteTransactionOfId({ id });
+};
 
 export const transactionColumns: ColumnDef<Transactions>[] = [
   {
@@ -58,13 +63,20 @@ export const transactionColumns: ColumnDef<Transactions>[] = [
   {
     accessorKey: "actions",
     header: "",
-    cell: ({ row: { original: transaction } }) => (
-      <div className="space-x-1">
-        <EditTransactionButton transaction={transaction} />
-        <Button variant="ghost" size="icon" className="text-muted-foreground">
-          <TrashIcon />
-        </Button>
-      </div>
-    ),
+    cell: ({ row: { original: transaction } }) => {
+      return (
+        <div className="space-x-1">
+          <EditTransactionButton transaction={transaction} />
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-muted-foreground"
+            onClick={handleDeleteTransactionOfId(transaction.id)}
+          >
+            <TrashIcon />
+          </Button>
+        </div>
+      );
+    },
   },
 ];
