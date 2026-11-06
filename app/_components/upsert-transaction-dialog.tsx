@@ -18,6 +18,7 @@ import {
   TRANSACTION_PAYMENT_METHOD_OPTIONS,
   TRANSACTION_TYPES_OPTIONS,
 } from "../_domain/transaction";
+import { useActionWithLoader } from "../_lib/use-action-with-loader";
 import { MoneyInput } from "./money-input";
 import { DatePicker } from "./ui/date-picker";
 import {
@@ -81,6 +82,7 @@ export const UpsertTransactionDialog = ({
   setIsOpen,
 }: UpsertTransactionDialogProps) => {
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const actionWithLoader = useActionWithLoader();
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -97,7 +99,9 @@ export const UpsertTransactionDialog = ({
   const onSubmit = async (data: FormSchema) => {
     try {
       setIsloading(true);
-      await upsertTransactions({ ...data, id: transactionId });
+      await actionWithLoader(() =>
+        upsertTransactions({ ...data, id: transactionId }),
+      );
       setIsOpen(false);
       form.reset();
       toast.success("Transação salva com sucesso.");

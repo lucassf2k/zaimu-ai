@@ -1,12 +1,14 @@
 "use client";
 
 import { Button } from "@/app/_components/ui/button";
+import { useActionWithLoader } from "@/app/_lib/use-action-with-loader";
 import { createStripeCheckout } from "@/app/subscription/_actions/create-stripe-checkout";
 import { useUser } from "@clerk/nextjs";
 import { loadStripe } from "@stripe/stripe-js";
 import Link from "next/link";
 
 const AcquirePlanButton = () => {
+  const actionWithLoader = useActionWithLoader();
   const { user } = useUser();
 
   const handleAcquirePlan = async () => {
@@ -39,7 +41,7 @@ const AcquirePlanButton = () => {
     <Button
       variant="gradient"
       className="w-full rounded-full font-bold"
-      onClick={handleAcquirePlan}
+      onClick={() => actionWithLoader(() => handleAcquirePlan())}
     >
       Adquirir plano
     </Button>

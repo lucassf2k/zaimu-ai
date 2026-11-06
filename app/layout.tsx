@@ -25,7 +25,7 @@ export default function RootLayout({
     <ClerkProvider appearance={{ baseTheme: dark }}>
       <html lang="pt-BR">
         <body className={`${mulish.className} dark antialiased`}>
-          <NextTopLoader color="#F627BB" />
+          <NextTopLoader color="#3b82f6" height={3} showSpinner={false} />
           {children}
           <Toaster />
         </body>
