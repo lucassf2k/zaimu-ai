@@ -4,7 +4,7 @@ import { LastTransactions } from "@/app/(home)/_components/last-transactions";
 import { SummaryCards } from "@/app/(home)/_components/summary-cards";
 import { TimeSelect } from "@/app/(home)/_components/time-select";
 import { TransactionsPieChartDonut } from "@/app/(home)/_components/transactions-pie-chart";
-import { homeController } from "@/app/(home)/_controllers/use-home-controller";
+import { homeController } from "@/app/(home)/_controllers/home-controller";
 import { Navbar } from "@/app/_components/navbar";
 
 interface HomeProps {

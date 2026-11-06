@@ -62,7 +62,7 @@ export const TransactionsPieChartDonut = ({
   ];
 
   return (
-    <GlassCard variant="blue" className="flex flex-col p-6">
+    <GlassCard variant="purple" className="flex flex-col p-6">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}

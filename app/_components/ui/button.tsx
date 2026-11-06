@@ -37,6 +37,7 @@ const buttonVariants = cva(
           "hover:brightness-110",
           "hover:shadow-[0_4px_25px_rgba(168,85,247,0.4)]",
           "active:scale-[0.98]",
+          "border-none",
         ].join(" "),
       },
       size: {

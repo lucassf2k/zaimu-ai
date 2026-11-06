@@ -275,7 +275,7 @@ export const UpsertTransactionDialog = ({
               </DialogClose>
               <Button
                 type="submit"
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 border-0"
                 disabled={isLoading}
                 variant="gradient"
               >

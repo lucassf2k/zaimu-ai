@@ -29,7 +29,7 @@ export const AddTransactionButton = ({ userCanAddTransaction }: Props) => {
           <TooltipTrigger asChild>
             <Button
               variant="gradient"
-              className="rounded-full font-bold"
+              className="rounded-full font-bold boder-0"
               onClick={hanldeOpenDialog()}
               disabled={userCanAddTransaction}
             >

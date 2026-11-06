@@ -1,3 +1,4 @@
+import { GlassCard } from "@/app/_components/glass-card";
 import { Button } from "@/app/_components/ui/button";
 import { CardContent, CardHeader, CardTitle } from "@/app/_components/ui/card";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
@@ -35,44 +36,48 @@ export const LastTransactions = ({
   };
 
   return (
-    <ScrollArea className="rounded-md border">
-      <CardHeader className="flex-row items-center justify-between">
-        <CardTitle className="font-bold">Últimas transações</CardTitle>
-        <Button variant="glass" className="rounded-full font-bold" asChild>
-          <Link href="/transactions">Ver mais</Link>
-        </Button>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {lastTransactions.map((transaction) => (
-          <div
-            key={transaction.id}
-            className="flex justify-between items-center"
-          >
-            <div className="flex items-center gap-3">
-              <div className=" bg-white/[0.03] p-3 rounded-lg">
-                <Image
-                  src={
-                    TRANSACTION_PAYMENT_METHOD_ICONS[transaction.paymentMethod]
-                  }
-                  height={20}
-                  width={20}
-                  alt="PIX"
-                />
+    <GlassCard variant="pink">
+      <ScrollArea className="h-full">
+        <CardHeader className="flex-row items-center justify-between">
+          <CardTitle className="font-bold">Últimas transações</CardTitle>
+          <Button variant="glass" className="rounded-full font-bold" asChild>
+            <Link href="/transactions">Ver mais</Link>
+          </Button>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {lastTransactions.map((transaction) => (
+            <div
+              key={transaction.id}
+              className="flex justify-between items-center"
+            >
+              <div className="flex items-center gap-3">
+                <div className=" bg-white/[0.03] p-3 rounded-lg">
+                  <Image
+                    src={
+                      TRANSACTION_PAYMENT_METHOD_ICONS[
+                        transaction.paymentMethod
+                      ]
+                    }
+                    height={20}
+                    width={20}
+                    alt="PIX"
+                  />
+                </div>
+                <div>
+                  <p className="text-sm font-bold">{transaction.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {dateFormatted(transaction.date)}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-bold">{transaction.name}</p>
-                <p className="text-sm text-muted-foreground">
-                  {dateFormatted(transaction.date)}
-                </p>
-              </div>
+              <p className={`text-sm font-bold ${getAmountColor(transaction)}`}>
+                {getAmountPrefix(transaction)}
+                {FormatCurrency.toBR(Number(transaction.amaount))}
+              </p>
             </div>
-            <p className={`text-sm font-bold ${getAmountColor(transaction)}`}>
-              {getAmountPrefix(transaction)}
-              {FormatCurrency.toBR(Number(transaction.amaount))}
-            </p>
-          </div>
-        ))}
-      </CardContent>
-    </ScrollArea>
+          ))}
+        </CardContent>
+      </ScrollArea>
+    </GlassCard>
   );
 };
